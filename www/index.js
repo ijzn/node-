@@ -1,11 +1,10 @@
 const http = require('http');
-const qs = require('querystring')
 
-const cb = require('../app.js');
+const serverHandle = require('../app.js');
 
 const PORT = 4002;
 
-const server = http.createServer(cb)
+const server = http.createServer(serverHandle);
 
 server.listen(PORT)
 

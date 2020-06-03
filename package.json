@@ -2,9 +2,9 @@
   "name": "http",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "www/index.js",
   "scripts": {
-    "dev": "nodemon app.js"
+    "dev": "nodemon www/index.js"
   },
   "keywords": [],
   "author": "",

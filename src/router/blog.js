@@ -1,5 +1,5 @@
-const { getList } = require('../constroller/blog.js');
 const { SuccessModel } = require('../module/index.js');
+const { getList, getDetail } = require('../constroller/blog.js');
 const handleBolgRouter = (req, res) => {
   const method = req.method;
 
@@ -14,9 +14,9 @@ const handleBolgRouter = (req, res) => {
 
   // 获取博客详情
   if (method === 'GET' && req.path === '/api/blog/detail') {
-    return {
-      msg: '这是获取博客详情的接口',
-    };
+    const id = req.query.id || '';
+    const detailData = getDetail(id);
+    return new SuccessModel(detailData);
   }
 
   // 新建一篇博客

@@ -4,7 +4,7 @@ const handleUserRouter = require('./src/router/user.js');
 
 function getPostData(req) {
   return new Promise((resolve, reject) => {
-    if (req.method !== 'POSt') {
+    if (req.method !== 'POST') {
       resolve({});
     }
     if (req.headers['content-type'] !== 'application/json') {
@@ -18,7 +18,7 @@ function getPostData(req) {
       if (!postData) {
         resolve({});
       }
-      resolve(JSON.stringify(postData));
+      resolve(JSON.parse(postData));
     });
   });
 }
@@ -33,10 +33,10 @@ const serverHandle = async (req, res) => {
 
   // 处理 post data
   try {
-    req.data = await getPostData(req);
+    req.body = await getPostData(req);
   } catch (error) {
     console.error(error);
-    req.data = '';
+    req.body = '';
   }
 
   // 处理blog路由

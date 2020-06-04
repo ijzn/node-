@@ -36,7 +36,29 @@ const getDetail = (id) => {
   };
 };
 
+const newBlog = (blogData = {}) => {
+  console.log(blogData);
+  // blogData 是个对象，包含title 和 content 属性
+  // 表示新建blog表格. 插入数据库的id
+  return {
+    id: 3
+  }
+} 
+
+const updateBlog = (id, blogData = {}) => {
+  // blogData 是个对象，包含title 和 content 属性
+  // 表示新建blog表格. 插入数据库的id
+  return true
+} 
+
+const delBlog = id =>{
+  return false
+}
+
 module.exports = {
   getList,
   getDetail,
+  newBlog,
+  updateBlog,
+  delBlog
 };

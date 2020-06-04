@@ -1,10 +1,20 @@
+
+const { login } = require('../constroller/user.js');
+const { SuccessModel, ErrorModel } = require('../module/index.js')
+
+
+
 const handleUserRouter = (req, res) => {
-    const method = req.method;
+    const { method, path } = req;
     // 更新一篇博客
-    if (method === "POST" && req.path === "/api/user/login") {
-        return {
-            msg: "这是一个登录的接口"
-        }  
+    if (method === "POST" && path === "/api/user/login") {
+        const { username, pwd } = req.body;
+        const result = login(username, pwd);
+        if (result) {
+            return new SuccessModel();
+        } else {
+            return new ErrorModel('登录失败')
+        }
     }
 }
 

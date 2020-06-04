@@ -1,5 +1,5 @@
-const { SuccessModel } = require('../module/index.js');
-const { getList, getDetail } = require('../constroller/blog.js');
+const { SuccessModel, ErrorModel } = require('../module/index.js');
+const { getList, getDetail, newBlog, updateBlog, delBlog } = require('../constroller/blog.js');
 const handleBolgRouter = (req, res) => {
   const method = req.method;
 
@@ -21,17 +21,34 @@ const handleBolgRouter = (req, res) => {
 
   // 新建一篇博客
   if (method === 'POST' && req.path === '/api/blog/new') {
-    return {
-      msg: '这是一个新建博客的接口',
-    };
+    const blogData = newBlog(req.body);
+    return new SuccessModel(blogData);
   }
 
   // 更新一篇博客
   if (method === 'POST' && req.path === '/api/blog/update') {
-    return {
-      msg: '这是一个更新博客的接口',
-    };
+    const id = req.query.id || '';
+    const result = updateBlog(id, req.body);
+    if (result) {
+      return new SuccessModel();
+    } else {
+      return new ErrorModel('更新博客失败');
+    }
   }
+
+  // 删除一篇博客
+  if (method === 'POST' && req.path === '/api/blog/del') {
+    const id = req.query.id;
+    const data = delBlog(id);
+    if (data) {
+      return new SuccessModel();
+    } else {
+      return new ErrorModel('删除博客失败')
+    }
+  }
+
 };
+
+
 
 module.exports = handleBolgRouter;
